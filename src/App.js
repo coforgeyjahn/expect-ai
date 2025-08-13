@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import CompanyProfile from './companyProfile.js';
+import LoginPopup from './loginPopup.js';
 
 function App() {
+  let [loginOpen, setLoginOpen] = useState(false);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <header className="app-header">
+      <div className="logo">Ask Una</div>
+      <input className="search-input" placeholder="Search for your company to get started for free" />
+      <button type="button" className="login-button" onClick={() => setLoginOpen(true)}>Sign in</button>
+      {loginOpen && (
+        <LoginPopup 
+          onClose={() => setLoginOpen(false)}
+        />
+      )}
+    </header>
+
+      <div className="app-body">
+        <div className="third company"><CompanyProfile /></div>
+      </div>
     </div>
   );
 }
